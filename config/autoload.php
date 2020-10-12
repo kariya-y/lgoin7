@@ -1,4 +1,5 @@
 <?php
+
 /*
 MyApp
 index.php controller
@@ -7,12 +8,12 @@ MyApp\Controller\Index
 */
 
 spl_autoload_register(function($class) {
- $prefix = 'login7\\';
- if (strpos($class, $prefix) === 0) {
-   $className = substr($class, strlen($prefix));
-   $classFilePath = __DIR__ . '/../lib/' . str_replace('\\', '/', $className) . '.php';
-   if (file_exists($classFilePath)) {
-     require $classFilePath;
-   }
- }
+  $prefix = 'MyApp\\';
+  if (strpos($class, $prefix) === 0) {
+    $className = substr($class, strlen($prefix));
+    $classFilePath = __DIR__ . '/../lib/' . str_replace('\\', '/', $className) . '.php';
+    if (file_exists($classFilePath)) {
+      require $classFilePath;
+    }
+  }
 });

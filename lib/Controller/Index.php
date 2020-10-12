@@ -1,13 +1,16 @@
 <?php
-namespace login7\Controller;
+namespace MyApp\Controller;
+class Index extends \MyApp\Controller {
 
-class Index extends \login7\Controller {
-    public function run() {
-        if (!$this->isLoggedIn()) {
-            // ログインしていない場合はログイン画面にリダイレクトをかける
-            header('Location: '. SITE_URL.'/public_html/login.php');
-            exit;
-        }
-        // get users info
+  public function run() {
+    if (!$this->isLoggedIn()) {
+      // ログインしていない場合はログイン画面にリダイレクトをかける
+      header('Location: ' . SITE_URL . '/login.php');
+      exit;
+    }
+    
+    // get users info
+    $userModel = new \MyApp\Model\User();
+    $this->setValues('users', $userModel->findAll());
     }
 }

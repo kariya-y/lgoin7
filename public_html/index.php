@@ -24,9 +24,14 @@ $app->run();
       <?= h($app->me()->email); ?> <input type="submit" value="Log Out">　
       <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     </form>
-    <h1>Users <span class="fs12">(<?= count($app->getValues()->users); 
+    <h1>Users <span class="fs12">(<?= count($app->getValues()->users);
     ?>)</span></h1>
+    <form action="change.php" method="post" id="change">
+      <input type="submit" value="個人情報変更">
+      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+    </form>
     <ul><?php foreach($app->getValues()->users as $user) : ?>
+      <li>名前：<?= h($user->name); ?></li>
       <li><?= h($user->email); ?></li>
     <?php endforeach; ?>
     </ul>

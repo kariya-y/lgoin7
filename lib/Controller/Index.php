@@ -8,7 +8,7 @@ class Index extends \MyApp\Controller {
       header('Location: ' . SITE_URL . '/login.php');
       exit;
     }
-    
+
     // get users info
     $userModel = new \MyApp\Model\User();
     $this->setValues('users', $userModel->findAll());

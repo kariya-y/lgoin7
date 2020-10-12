@@ -29,7 +29,7 @@ class Login extends \MyApp\Controller {
     } else {
       try {
         $userModel = new \MyApp\Model\User();
-        $user = $userModel->login([ //変更
+        $user = $userModel->login([
           'email' => $_POST['email'],
           'password' => $_POST['password']
         ]);

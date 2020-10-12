@@ -7,6 +7,16 @@ class User extends \MyApp\Model {
 	private $email;
 	private $name;
 	private $created;
+
+	public function setName($name){
+		$this->name = $name;
+	}
+
+	public function setEmail($email){
+		$this->email = $email;
+	}
+
+
 	public function create($values) {
 		$stmt = $this->db->prepare ( "insert into users (email, password, created, modified) values (:email, :password, now(), now())" );
 		$res = $stmt->execute ( [
@@ -40,10 +50,12 @@ class User extends \MyApp\Model {
 		return $stmt->fetchAll ();
 	}
 	public function change($user) {
-		$stmt = $this->db->prepare ( "UPDATE users SET name = :name WHERE id = :id" );
-		var_dump($values);
+//		$stmt = $this->db->prepare ( "UPDATE users SET name = :name WHERE id = :id" );
+		$stmt = $this->db->prepare ( "UPDATE users SET name = :name, email = :email WHERE id = :id" );
+		var_dump($user);
 		$res = $stmt->execute ( [
 				':name' => $user->name,
+				':email' => $user->email,
 				':id' => $user->id
 		] );
 		if ($res === false) {

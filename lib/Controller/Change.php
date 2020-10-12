@@ -17,11 +17,14 @@ class Change extends \MyApp\Controller {
 		}
 	}
 	protected function postProcess() {
+		$result = false;
 		if (isset ( $_POST ['name'] ) && $_POST ['name'] != null) {
 			$me = $_SESSION ['me'];
 			$me->name = $_POST ['name'];
-			$userModel = new \MyApp\Model\User();
-			$userModel->change($me);
+			$me->email = $_POST ['email'];
+			$userModel = new \MyApp\Model\User ();
+			$result = $userModel->change ( $me );
 		}
+		var_dump ( $result );
 	}
 }

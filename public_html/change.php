@@ -23,6 +23,7 @@ $app->run();
  	<form action="change.php" method="post">
       <ul>
         <li>email：<?= h($app->me()->email)?></li>
+        <input type="text" name="email" value="<?= h($app->me()->email)?>">
         <li>名前：<?= h($app->me()->name)?></li>
         <input type="text" name="name" value="<?= h($app->me()->name)?>">
       </ul>

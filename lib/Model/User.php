@@ -7,16 +7,12 @@ class User extends \MyApp\Model {
 	private $email;
 	private $name;
 	private $created;
-
-	public function setName($name){
+	public function setName($name) {
 		$this->name = $name;
 	}
-
-	public function setEmail($email){
+	public function setEmail($email) {
 		$this->email = $email;
 	}
-
-
 	public function create($values) {
 		$stmt = $this->db->prepare ( "insert into users (email, password, created, modified) values (:email, :password, now(), now())" );
 		$res = $stmt->execute ( [
@@ -49,17 +45,15 @@ class User extends \MyApp\Model {
 		$stmt->setFetchMode ( \PDO::FETCH_CLASS, 'stdClass' );
 		return $stmt->fetchAll ();
 	}
-	public function change($user) {
-//		$stmt = $this->db->prepare ( "UPDATE users SET name = :name WHERE id = :id" );
+	public function change($values) {
 		$stmt = $this->db->prepare ( "UPDATE users SET name = :name, email = :email WHERE id = :id" );
-		var_dump($user);
 		$res = $stmt->execute ( [
-				':name' => $user->name,
-				':email' => $user->email,
-				':id' => $user->id
+				':name' => $values ['name'],
+				':email' => $values ['email'],
+				':id' => $values ['id']
 		] );
 		if ($res === false) {
-			throw new \MyApp\Exception\DuplicateEmail ();
+			throw new \MyApp\Exception\ErrorUserChange ();
 		}
 		return $res;
 	}

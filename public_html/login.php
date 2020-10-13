@@ -21,7 +21,7 @@ $app->run();
  <div id="container">
    <form action="" method="post" id="login"> <!-- 追記 -->
      <p>
-       <input type="text" name="email" placeholder="email" value="<?= isset($app->getValues()->email) ? h($app->getValues()->email) : ''; ?>"> <!-- 追記 -->
+       <input type="text" name="email" placeholder="email" value="<?= isset($app->getValues()->email) ? h($app->getValues()->email) : ''; ?>">
      </p>
      <p>
         <input type="password" name="password" placeholder="password">

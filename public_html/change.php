@@ -21,6 +21,7 @@ $app->run();
  <div id="container">
  	<h1>個人情報変更</h1>
  	<form action="change.php" method="post">
+ 	  <p class="err"><?= h($app->getErrors('change')); ?></p>
       <ul>
         <li>email：<?= h($app->me()->email)?></li>
         <input type="text" name="email" value="<?= h($app->me()->email)?>">

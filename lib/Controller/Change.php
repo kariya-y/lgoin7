@@ -3,6 +3,7 @@
 namespace MyApp\Controller;
 
 use MyApp\Model\User;
+use MyApp;
 
 class Change extends \MyApp\Controller {
 	public function run() {
@@ -18,13 +19,28 @@ class Change extends \MyApp\Controller {
 	}
 	protected function postProcess() {
 		$result = false;
+		$newName = $_POST ['name'];
+		$newEmail = $_POST ['email'];
+		$me = $_SESSION ['me'];
+
 		if (isset ( $_POST ['name'] ) && $_POST ['name'] != null) {
-			$me = $_SESSION ['me'];
-			$me->name = $_POST ['name'];
-			$me->email = $_POST ['email'];
-			$userModel = new \MyApp\Model\User ();
-			$result = $userModel->change ( $me );
+//			$me->name = $_POST ['name'];
+//			$me->email = $_POST ['email'];
+			$userModel = new MyApp\Model\User;
+			try {
+				$result = $userModel->change ([
+					'id'       => $me->id,
+					'name'     => $newName,
+					'email' => $newEmail
+				]);
+			} catch(MyApp\Exception\ErrorUserChange $e) {
+				$this->setErrors('change', $e->getMessage());
+				return;
+			}
 		}
-		var_dump ( $result );
+		if($result){
+			$me->name = $newName;
+			$me->email = $newEmail;
+		}
 	}
 }

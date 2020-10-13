@@ -2,6 +2,6 @@
 
 namespace MyApp\Exception;
 
-class InvalidEmail extends \Exception {
+class ErrorUserChange extends \Exception {
   protected $message = 'Userクラスのchangeメソッドで何か問題がありました';
 }
